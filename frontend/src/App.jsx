@@ -1,34 +1,37 @@
+import {BrowserRouter as Router, Routes, Route, BrowserRouter} from 'react-router-dom';
+import Login from './pages/auth/Login.jsx';
+import SignUp from './pages/auth/sinUp.jsx';
+import CodeRunner from "./pages/editortest.jsx";
 
-
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import SignUp from './pages/sinUp';
-import Home from './pages/home';
-import Cours from './pages/cours';
-import QSM from './pages/qsm';
-import Mathematique from './pages/mathematique';
-import Informatique from './pages/informatique';
-import Physique from './pages/physique';
-import CodeRunner from './pages/editortest';
-
+import Home from "./pages/home";
+import Htmlcssjs from "./pages/htmlcssjs.jsx";
+import Html_cours from "./pages/cours/Html_cours.jsx";
+import Css_cours from "./pages/cours/Css_cours.jsx";
+import Js_cours from "./pages/cours/Js_cours.jsx";
+import Python_cours from "./pages/cours/Python_cours.jsx";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<CodeRunner />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/cours" element={<Cours />} />
-        <Route path="/qsm" element={<QSM />} />
-        <Route path="/mathematique" element={<Mathematique />} />
-        <Route path="/informatique" element={<Informatique />} />
-        <Route path="/physique" element={<Physique />} />
-      </Routes>
-    </Router>
-  );
+    return (
+
+        <Router>
+            <Routes>
+
+                <Route path="/Html" element={<Htmlcssjs/>}/>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/PY" element={<CodeRunner/>}/>
+                <Route path="/Html_cours/*" element={<Html_cours/>}/>
+                <Route path="/Css_cours" element={<Css_cours/>}/>
+                <Route path="/Js_cours" element={<Js_cours/>}/>
+                <Route path="/Python_cours" element={<Python_cours/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/signup" element={<SignUp/>}/>
+
+            </Routes>
+        </Router>
+
+
+
+    );
 }
 
 export default App;

@@ -16,50 +16,37 @@ const CodeRunner = () => {
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const runCode = async () => {
-    if (!code.trim()) {
-      setOutput("Veuillez écrire du code !");
-      return;
-    }
+ const runCode = async () => {
+  setLoading(true);
+  setOutput("");
 
-    setLoading(true);
-    setOutput("");
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/code/run",
+      {
+        language: "python",
+        code: code
+      }
+    );
 
-    try {
-      const response = await axios.post(
-        "https://emkc.org/api/v2/piston/execute",
-        {
-        "language": "python",
-        "version": "3.10.0",
-        "files": [
-    {
-      "name": "main.py",
-      "content": code
-    }
-  ]},
-        {
-          headers: { "Content-Type": "application/json" }
-        }
-      );
-console.log(response.data.run.stdout);
-      const result=response.data;
-if (result.run) {
-  const stdout = result.run.stdout ? "Output:\n" + result.run.stdout : "";
-  const stderr = result.run.stderr ? "Erreur:\n" + result.run.stderr : "";
-  setOutput(stdout + (stdout && stderr ? "\n" : "") + stderr || "Aucun output");
-} else {
-  setOutput("Erreur : run est vide ou undefined");
-}
+    const { stdout, stderr } = response.data;
 
+    setOutput(
+      (stdout ? "Output:\n" + stdout : "") +
+      (stdout && stderr ? "\n" : "") +
+      (stderr ? "Erreur:\n" + stderr : "")
+    );
 
-    } catch (error) {
-      setOutput("Erreur API : " + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (error) {
+    setOutput("Erreur : " + error.response?.data?.message);
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
+
+  
     <div className="max-w-4xl mx-auto p-4 space-y-4">
       <h1 className="text-2xl font-bold text-center">Mini IDE avec Monaco + Judge0</h1>
 

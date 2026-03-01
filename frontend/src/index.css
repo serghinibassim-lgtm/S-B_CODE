@@ -1,1 +1,31 @@
+{/*@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Orbitron:wght@500&display=swap');
+*/}
 @import "tailwindcss";
+
+
+{/*
+@theme{
+    --font-orbitron: 'Orbitron', sans-serif;
+    --font-jetbrains: 'JetBrains Mono', sans-serif;
+}
+
+@layer components {
+    .icon-btn {
+        @apply text-zinc-300 hover:text-white transition
+        p-2 rounded-lg hover:bg-zinc-700;
+    }
+}
+*/}
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-scroll {
+    animation: scroll 25s linear infinite;
+}
