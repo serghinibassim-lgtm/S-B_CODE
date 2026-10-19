@@ -21,10 +21,9 @@ const userSchema = new mongoose.Schema(
 );
 
 
-userSchema.pre('save',async function (next){
+userSchema.pre('save', async function (){
     const salt=await bcrypt.genSalt();
     this.password= await bcrypt.hash(this.password,salt)
-    next()
 })
 
 userSchema.statics.login= async function(email, password) {
