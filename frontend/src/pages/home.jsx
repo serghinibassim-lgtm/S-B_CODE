@@ -7,7 +7,7 @@ import LearningSection from "../component/home_component/LearningSection.jsx";
 import Dev_Editor from "../component/code/dev_Editor.jsx";
 export default function Home() {
     return (
-        <div className="min-h-screen bg-linear-to-b from-gray-900 via-gray-900 to-neutral-700 text-white">
+        <div className="min-h-screen bg-gray-950 text-white">
             <Navbar/>
             <Hero_Home/>
             <Langage_presentation/>

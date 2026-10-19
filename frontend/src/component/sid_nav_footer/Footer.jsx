@@ -28,7 +28,7 @@ export default function Footer() {
           <ul>
             {languages.map((lang, index) => (
               <li key={index} className="mb-1 hover:text-blue-400 transition">
-               <Link to={`/${lang.toLowerCase()}`}>{lang}</Link>
+               <Link to={`/courses/${lang.toLowerCase()}`}>{lang}</Link>
               </li>
             ))}
           </ul>

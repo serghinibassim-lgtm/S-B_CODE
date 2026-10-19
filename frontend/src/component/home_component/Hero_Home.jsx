@@ -14,8 +14,8 @@ function Hero_Home() {
           Apprenez pas à pas et de manière interactive
         </p>
         <div className="flex gap-4">
-          <button className="px-6 py-3 rounded-md border border-emerald-300 hover:bg-emerald-600 transition">
-           <Link to={'/SignUp '}>Commencer maintenet</Link>
+          <button className="px-6 py-3 rounded-md border border-emerald-300 hover:bg-emerald-600 hover:text-white transition">
+           <Link to={'/signup'}>Commencer maintenant</Link>
           </button>
         </div>
       </section>

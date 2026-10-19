@@ -1,22 +1,246 @@
-{/*@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Orbitron:wght@500&display=swap');
-*/}
 @import "tailwindcss";
 
+/* ==================================================================== */
+/*  THÈME CLAIR / SOMBRE                                                */
+/*  Les classes Tailwind existantes (bg-gray-900, text-gray-400,        */
+/*  border-gray-800, etc.) pointent vers des variables qui changent     */
+/*  selon le thème. Le mode sombre reste le thème par défaut.           */
+/* ==================================================================== */
 
-{/*
-@theme{
-    --font-orbitron: 'Orbitron', sans-serif;
-    --font-jetbrains: 'JetBrains Mono', sans-serif;
+@theme inline {
+    /* Échelle de gris : surfaces, textes et bordures */
+    --color-gray-50: var(--app-gray-50);
+    --color-gray-100: var(--app-gray-100);
+    --color-gray-200: var(--app-gray-200);
+    --color-gray-300: var(--app-gray-300);
+    --color-gray-400: var(--app-gray-400);
+    --color-gray-500: var(--app-gray-500);
+    --color-gray-600: var(--app-gray-600);
+    --color-gray-700: var(--app-gray-700);
+    --color-gray-800: var(--app-gray-800);
+    --color-gray-900: var(--app-gray-900);
+    --color-gray-950: var(--app-gray-950);
+
+    /* zinc : aligné sur la même échelle (terminal) */
+    --color-zinc-700: var(--app-gray-700);
+    --color-zinc-800: var(--app-gray-800);
+    --color-zinc-900: var(--app-gray-900);
+
+    /* Accents : seuls les tons utilisés dans l'interface sont redéfinis */
+    --color-blue-100: var(--app-blue-100);
+    --color-blue-200: var(--app-blue-200);
+    --color-blue-300: var(--app-blue-300);
+    --color-blue-400: var(--app-blue-400);
+    --color-blue-500: var(--app-blue-500);
+    --color-blue-950: var(--app-blue-950);
+
+    --color-emerald-100: var(--app-emerald-100);
+    --color-emerald-200: var(--app-emerald-200);
+    --color-emerald-300: var(--app-emerald-300);
+    --color-emerald-400: var(--app-emerald-400);
+    --color-emerald-900: var(--app-emerald-900);
+    --color-emerald-950: var(--app-emerald-950);
+
+    --color-amber-100: var(--app-amber-100);
+    --color-amber-200: var(--app-amber-200);
+    --color-amber-300: var(--app-amber-300);
+    --color-amber-400: var(--app-amber-400);
+    --color-amber-950: var(--app-amber-950);
+
+    --color-red-200: var(--app-red-200);
+    --color-red-300: var(--app-red-300);
+    --color-red-400: var(--app-red-400);
+    --color-red-500: var(--app-red-500);
+    --color-red-900: var(--app-red-900);
+    --color-red-950: var(--app-red-950);
+
+    --color-indigo-400: var(--app-indigo-400);
+    --color-indigo-500: var(--app-indigo-500);
+
+    --color-purple-400: var(--app-purple-400);
 }
 
-@layer components {
-    .icon-btn {
-        @apply text-zinc-300 hover:text-white transition
-        p-2 rounded-lg hover:bg-zinc-700;
-    }
+/* ------------------------- Thème sombre (défaut) -------------------- */
+:root,
+html.dark {
+    color-scheme: dark;
+
+    --app-gray-50: #f9fafb;
+    --app-gray-100: #f3f4f6;
+    --app-gray-200: #e5e7eb;
+    --app-gray-300: #d1d5dc;
+    --app-gray-400: #99a1af;
+    --app-gray-500: #6a7282;
+    --app-gray-600: #4a5565;
+    --app-gray-700: #364153;
+    --app-gray-800: #1e2939;
+    --app-gray-900: #101828;
+    --app-gray-950: #030712;
+
+    --app-blue-100: #dbeafe;
+    --app-blue-200: #bfdbfe;
+    --app-blue-300: #93c5fd;
+    --app-blue-400: #60a5fa;
+    --app-blue-500: #3b82f6;
+    --app-blue-950: #172554;
+
+    --app-emerald-100: #d1fae5;
+    --app-emerald-200: #a7f3d0;
+    --app-emerald-300: #6ee7b7;
+    --app-emerald-400: #34d399;
+    --app-emerald-900: #064e3b;
+    --app-emerald-950: #022c22;
+
+    --app-amber-100: #fef3c7;
+    --app-amber-200: #fde68a;
+    --app-amber-300: #fcd34d;
+    --app-amber-400: #fbbf24;
+    --app-amber-950: #451a03;
+
+    --app-red-200: #fecaca;
+    --app-red-300: #fca5a5;
+    --app-red-400: #f87171;
+    --app-red-500: #ef4444;
+    --app-red-900: #7f1d1d;
+    --app-red-950: #450a0a;
+
+    --app-indigo-400: #818cf8;
+    --app-indigo-500: #6366f1;
+
+    --app-purple-400: #c084fc;
 }
-*/}
+
+/* --------------------------- Thème clair ---------------------------- */
+html.light {
+    color-scheme: light;
+
+    --app-gray-50: #020617;
+    --app-gray-100: #0f172a;
+    --app-gray-200: #1e293b;
+    --app-gray-300: #334155;
+    --app-gray-400: #475569;
+    --app-gray-500: #64748b;
+    --app-gray-600: #64748b;
+    --app-gray-700: #cbd5e1;
+    --app-gray-800: #e5eaf0;
+    --app-gray-900: #ffffff;
+    --app-gray-950: #f1f5f9;
+
+    --app-blue-100: #1e40af;
+    --app-blue-200: #1e40af;
+    --app-blue-300: #1d4ed8;
+    --app-blue-400: #2563eb;
+    --app-blue-500: #2563eb;
+    --app-blue-950: #3b82f6;
+
+    --app-emerald-100: #065f46;
+    --app-emerald-200: #047857;
+    --app-emerald-300: #047857;
+    --app-emerald-400: #059669;
+    --app-emerald-900: #10b981;
+    --app-emerald-950: #34d399;
+
+    --app-amber-100: #92400e;
+    --app-amber-200: #92400e;
+    --app-amber-300: #b45309;
+    --app-amber-400: #d97706;
+    --app-amber-950: #f59e0b;
+
+    --app-red-200: #991b1b;
+    --app-red-300: #b91c1c;
+    --app-red-400: #dc2626;
+    --app-red-500: #dc2626;
+    --app-red-900: #ef4444;
+    --app-red-950: #ef4444;
+
+    --app-indigo-400: #4f46e5;
+    --app-indigo-500: #4f46e5;
+
+    --app-purple-400: #9333ea;
+}
+
+/* ==================================================================== */
+/*  TYPOGRAPHIE : texte globalement agrandi                             */
+/* ==================================================================== */
+html {
+    font-size: 18px;
+}
+
+/* ==================================================================== */
+/*  TEXTE BLANC EN MODE CLAIR                                           */
+/*  Il devient sombre sur les surfaces claires, mais reste blanc sur    */
+/*  les fonds colorés (boutons, badges, pastilles...).                  */
+/* ==================================================================== */
+
+/* Toujours blanc, quel que soit le thème (fonds définis en style inline) */
+.on-color {
+    color: #ffffff !important;
+}
+
+html.light .text-white {
+    color: #0f172a;
+}
+
+/* Fonds colorés pleins : le texte reste blanc */
+html.light :is(
+    [class~="bg-blue-500"], [class~="bg-blue-600"], [class~="bg-blue-700"],
+    [class~="bg-blue-600/50"], [class~="bg-blue-700/60"],
+    [class~="bg-emerald-500"], [class~="bg-emerald-600"], [class~="bg-emerald-700"],
+    [class~="bg-emerald-600/50"],
+    [class~="bg-green-500"], [class~="bg-green-600"], [class~="bg-green-700"],
+    [class~="bg-red-500"], [class~="bg-red-600"],
+    [class~="bg-amber-500"], [class~="bg-amber-600"],
+    [class~="bg-indigo-500"], [class~="bg-indigo-600"],
+    [class~="bg-purple-500"], [class~="bg-purple-600"],
+    [class~="bg-pink-500"], [class~="bg-yellow-500"]
+) {
+    color: #ffffff;
+}
+
+/* ... et leurs descendants qui portent explicitement text-white */
+html.light :is(
+    [class~="bg-blue-500"], [class~="bg-blue-600"], [class~="bg-blue-700"],
+    [class~="bg-blue-600/50"], [class~="bg-blue-700/60"],
+    [class~="bg-emerald-500"], [class~="bg-emerald-600"], [class~="bg-emerald-700"],
+    [class~="bg-emerald-600/50"],
+    [class~="bg-green-500"], [class~="bg-green-600"], [class~="bg-green-700"],
+    [class~="bg-red-500"], [class~="bg-red-600"],
+    [class~="bg-amber-500"], [class~="bg-amber-600"],
+    [class~="bg-indigo-500"], [class~="bg-indigo-600"],
+    [class~="bg-purple-500"], [class~="bg-purple-600"],
+    [class~="bg-pink-500"], [class~="bg-yellow-500"]
+) .text-white {
+    color: #ffffff;
+}
+
+/* Survol : le blanc devient sombre par défaut... */
+html.light .hover\:text-white:hover {
+    color: #0f172a;
+}
+
+html.light .group:hover .group-hover\:text-white {
+    color: #0f172a;
+}
+
+/* ... sauf quand le survol colore aussi le fond */
+html.light :is(
+    [class~="hover:bg-blue-500"], [class~="hover:bg-blue-600"], [class~="hover:bg-blue-700"],
+    [class~="hover:bg-emerald-500"], [class~="hover:bg-emerald-600"],
+    [class~="hover:bg-green-500"], [class~="hover:bg-green-600"], [class~="hover:bg-green-700"],
+    [class~="hover:bg-red-500"], [class~="hover:bg-red-600"],
+    [class~="hover:bg-amber-500"], [class~="hover:bg-amber-600"],
+    [class~="hover:bg-indigo-500"], [class~="hover:bg-indigo-600"]
+)[class~="hover:text-white"]:hover,
+html.light .group:hover :is(
+    [class~="group-hover:bg-blue-500"], [class~="group-hover:bg-blue-600"],
+    [class~="group-hover:bg-emerald-500"], [class~="group-hover:bg-emerald-600"]
+)[class~="group-hover:text-white"] {
+    color: #ffffff;
+}
+
+/* ==================================================================== */
+/*  ANIMATIONS                                                          */
+/* ==================================================================== */
 @keyframes scroll {
     0% {
         transform: translateX(0%);

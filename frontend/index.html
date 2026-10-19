@@ -1,10 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <title>S-B_CODE — Apprendre la programmation</title>
+    <script>
+      // Applique le thème enregistré avant le premier rendu (évite le flash)
+      (function () {
+        var theme = localStorage.getItem("sbcode-theme") === "light" ? "light" : "dark";
+        var root = document.documentElement;
+        root.classList.remove("dark", "light");
+        root.classList.add(theme);
+        root.style.colorScheme = theme;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

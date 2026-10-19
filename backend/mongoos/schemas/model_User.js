@@ -1,44 +1,90 @@
-import mongoose from 'mongoose'
-import bcrypt from 'bcryptjs'
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+
+const progressionItemSchema = new mongoose.Schema(
+    {
+        coursId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Cours'
+        },
+        chapitreId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Chapitre'
+        },
+        completedAt: {
+            type: Date,
+            default: Date.now
+        }
+    },
+    { _id: false }
+);
+
 const userSchema = new mongoose.Schema(
     {
+        username: {
+            type: String,
+            trim: true,
+            default: function () {
+                return this.fullname || '';
+            }
+        },
         fullname: {
             type: String,
-            required: [true, 'enter fullname'],
-            minlength: [6, 'fullnam min length is 6']
+            trim: true,
+            default: ''
         },
         email: {
             type: String,
-           // unique:true,
-            required: [true, 'enter email obligatoir']
+            required: [true, 'Email obligatoire'],
+            unique: true,
+            lowercase: true,
+            trim: true
         },
         password: {
             type: String,
-            required: [true, 'enter password'],
-            minlength: [4, 'password min length is 4']
+            required: [true, 'Mot de passe obligatoire'],
+            minlength: [4, 'Le mot de passe doit comporter au moins 4 caractères']
+        },
+        role: {
+            type: String,
+            enum: ['etudiant', 'administrateur'],
+            default: 'etudiant'
+        },
+        progression: {
+            type: [progressionItemSchema],
+            default: []
         }
-    }
+    },
+    { timestamps: true }
 );
 
+// Hachage du mot de passe uniquement s'il a été modifié
+userSchema.pre('save', async function () {
+    if (!this.isModified('password')) return;
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+});
 
-userSchema.pre('save', async function (){
-    const salt=await bcrypt.genSalt();
-    this.password= await bcrypt.hash(this.password,salt)
-})
+// Méthode statique de connexion (supporte email ou username)
+userSchema.statics.login = async function (identifier, password) {
+    const user = await this.findOne({
+        $or: [
+            { email: identifier?.toLowerCase() },
+            { username: identifier }
+        ]
+    });
 
-userSchema.statics.login= async function(email, password) {
-    const user = await this.findOne({ email });
     if (!user) {
-        throw Error('Email incorrect');
-        return ;
+        throw new Error('Email incorrect');
     }
+
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-        throw Error('Mot de passe incorrect');
+        throw new Error('Mot de passe incorrect');
     }
-    return user;
-}
 
+    return user;
+};
 
 const modelUser = mongoose.model('User', userSchema);
 export default modelUser;
